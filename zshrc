@@ -10,14 +10,6 @@ export ZSH=/Users/sam/.oh-my-zsh
 ZSH_THEME="samsam"
 SPACESHIP_DIR_TRUNC_REPO=false
 
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
@@ -62,6 +54,7 @@ SPACESHIP_DIR_TRUNC_REPO=false
 plugins=(
   git
   osx
+  brew
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -92,7 +85,11 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+ alias vim="nvim"
+ alias py3="python3"
+ alias pip="pip3"
+ alias py2="python2"
+ alias zshconfig="nvim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Set Spaceship ZSH as a prompt
