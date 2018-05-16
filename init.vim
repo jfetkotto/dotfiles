@@ -55,5 +55,7 @@ set laststatus=2
 
 set cursorline
 
+"set background=dark
+set termguicolors
 colorscheme dracula 
 
