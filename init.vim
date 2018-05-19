@@ -12,7 +12,9 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Townk/vim-autoclose'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'zchee/deoplete-clang'
+"Plugin 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plugin 'scrooloose/nerdtree'
+Plugin 'arakashic/chromatica.nvim'
 
 Plugin 'dracula/vim'
 
@@ -21,11 +23,22 @@ call vundle#end()
 filetype plugin indent on
 
 let g:airline_theme='dracula'
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 " DEOPLETE
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang'
+
+set completeopt -=preview
+
+let g:chromatica#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+let g:chromatica#responsive_mode=1
+let g:chromatica#enable_at_startup=1
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -37,7 +50,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-syntax on
+syntax enable 
 set nowrap
 set encoding=utf8
 
