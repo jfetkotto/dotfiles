@@ -1,6 +1,17 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Twitter Keys for LCSABOT
+export CONSUMER_KEY='1GMkr13PDNtmjYo4GHnf1zaU8'                                            
+                                  
+export CONSUMER_SECRET='TgxBwpJpFiD47g2KDoY84H2MuobTjemr8iig9DrdjqoQDwcEJu'                
+                                  
+export ACCESS_TOKEN='949229316902215681-niBwYYGlTebeoF8XelGoZ9Mba4AZsCP'                   
+                                  
+export ACCESS_SECRET='Qyxv6aKVbs18QwhqOgBNf5fK2gIsMpuQRSxA2N8u9CqLg'
+
+
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/sam/.oh-my-zsh
 
@@ -8,6 +19,16 @@ export ZSH=/Users/sam/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="samsam"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+#POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+#POWERLEVEL9K_DISABLE_RPROMPT=true
+#POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+#POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="> "
+#POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+#POWERLEVEL9k_COLOR_SCHEME='light'
+
+
 SPACESHIP_DIR_TRUNC_REPO=false
 
 # CASE_SENSITIVE="true"
