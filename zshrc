@@ -2,15 +2,6 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Twitter Keys for LCSABOT
-export CONSUMER_KEY='1GMkr13PDNtmjYo4GHnf1zaU8'                                            
-                                  
-export CONSUMER_SECRET='TgxBwpJpFiD47g2KDoY84H2MuobTjemr8iig9DrdjqoQDwcEJu'                
-                                  
-export ACCESS_TOKEN='949229316902215681-niBwYYGlTebeoF8XelGoZ9Mba4AZsCP'                   
-                                  
-export ACCESS_SECRET='Qyxv6aKVbs18QwhqOgBNf5fK2gIsMpuQRSxA2N8u9CqLg'
-
-
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/sam/.oh-my-zsh
