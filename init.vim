@@ -16,16 +16,27 @@ Plugin 'zchee/deoplete-clang'
 Plugin 'scrooloose/nerdtree'
 Plugin 'arakashic/chromatica.nvim'
 
+Plugin 'marijnh/tern_for_vim'
+
+
+Plugin 'othree/yajs.vim'
+
+"Colorschemes
 Plugin 'dracula/vim'
+Plugin 'iCyMind/NeoSolarized'
+
 
 call vundle#end()
 
 filetype plugin indent on
 
-let g:airline_theme='dracula'
+let g:tern_show_argument_hints='on_hold'
+let g:tern_map_keys=1
+
+"let g:airline_theme='dracula'
+let g:airline_theme='solarized'
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
-
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
@@ -60,8 +71,8 @@ set backspace=indent,eol,start
 set number
 set ruler
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set smarttab
 set expandtab
 
@@ -71,5 +82,6 @@ set cursorline
 
 "set background=dark
 set termguicolors
-colorscheme dracula 
+colorscheme NeoSolarized
+
 
