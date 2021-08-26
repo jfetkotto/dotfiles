@@ -1,7 +1,3 @@
-export HERBOT_PREFIX="!herbie"
-export HERBOT_TOKEN="NjczMTA1MDMzNzU1MzYxMjgw.XjVMMg.gcRnE7J4BsMkGb734LKCsf6YZr8"
-export MONGODB_URI="mongodb://localhost/data"
-
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
 # If you come from bash you might have to change your $PATH.
