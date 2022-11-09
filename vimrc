@@ -74,6 +74,7 @@ call plug#begin()
   Plug 'itchyny/lightline.vim'
   Plug 'SirVer/ultisnips'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'jiangmiao/auto-pairs'
 call plug#end()
 " }}}
 
