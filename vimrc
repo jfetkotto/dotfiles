@@ -80,10 +80,8 @@ call plug#end()
 colorscheme jellybeans
 let mapleader = ' '
 
-" Complete menu
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-"inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-"inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+" Remove search HL on return
+nnoremap <CR> :noh<CR><CR>
 
 " Ghetto NERDTree
 nnoremap <leader>f :Lexplore <CR>
@@ -103,7 +101,16 @@ autocmd BufRead,BufNewFile *.v set filetype=verilog
 autocmd BufRead,BufNewFile *.sv set filetype=systemverilog
 autocmd BufRead,BufNewFile *.yml set filetype=yaml
 
-" LSP
+" Allow tab in makefiles
+autocmd FileType make setlocal noexpandtab
+
+autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
+autocmd FileType rust setlocal tabstop=4 softtabstop=4 shiftwidth=4
+autocmd FileType c setlocal tabstop=8 softtabstop=8 shiftwidth=8
+autocmd FileType cpp setlocal tabstop=8 softtabstop=8 shiftwidth=8
+
+
+" COC
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
@@ -111,13 +118,14 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+nmap <leader>rn <Plug>(coc-rename)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 

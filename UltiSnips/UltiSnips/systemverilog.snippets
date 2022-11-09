@@ -1,0 +1,74 @@
+snippet sec "Foldable Section" b
+// {{{ $1
+$0
+endsnippet
+
+snippet end "End of Foldable Section" b
+// }}}
+$0
+endsnippet
+
+snippet dff_norst_noen "DFF: No Reset, No Enable" b
+always_ff @(posedge ${1:ck})
+	${2:q} <= ${3:d};
+$0
+endsnippet
+
+snippet dff_arst_noen "DFF: Async Reset, No Enable" b
+always_ff @(posedge ${1:ck}, posedge ${2:rst})
+	if ($2)
+		${3:q} <= ${4:value};
+	else
+		$3 <= ${5:d};
+$0
+endsnippet
+
+snippet dff_arst_en "DFF: Async Reset, Enable" b
+always_ff @(posedge ${1:ck}, posedge ${2:rst})
+	if ($2)
+		${3:q} <= ${4:value};
+	else if (${5:en})
+		$3 <= ${6:d};
+	else
+		$3 <= $3;
+$0
+endsnippet
+
+snippet dff_srst_noen "DFF: Sync Reset, No Enable" b
+always_ff @(posedge ${1:ck})
+	if (${2:rst})
+		${3:q} <= ${4:value};
+	else
+		$3 <= ${5:d};
+$0
+endsnippet
+
+snippet dff_srst_en "DFF: Sync Reset, Enable" b
+always_ff @(posedge ${1:ck})
+	if (${2:rst})
+		${3:q} <= ${4:value};
+	else if (${5:en})
+		$3 <= ${6:d};
+	else
+		$3 <= $3;
+$0
+endsnippet
+
+snippet tflop "Toggle Flip Flop"
+always_ff @(posedge ${1:ck})
+	if (${2:toggle})
+		${3:q} <= ~$3;
+	else
+		$3 <= $3;
+$0
+endsnippet
+
+snippet inst "Instantiate a module"
+// {{{ $1 - .u_$2()
+${1:module} #(
+	$0
+) u_${2:instance} (
+)
+// }}}
+endsnippet
+
