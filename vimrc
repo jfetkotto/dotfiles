@@ -39,12 +39,12 @@ set wildmenu
 set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 set spelllang=en_gb
 set spellfile=local.utf-8.add
-
+set completeopt=longest,menuone
+set signcolumn=yes
 let g:netrw_liststyle=3
 let g:netrw_banner=0
 let g:netrw_list_hide='.*\.git/$'
 let g:netrw_winsize=30
-
 let g:lightline = {
   \ 'colorscheme': 'jellybeans',
   \ 'active': {
@@ -55,27 +55,35 @@ let g:lightline = {
   \   'gitbranch': 'FugitiveHead'
   \ },
   \ }
+
+let g:UltiSnipsExpandTrigger="<leader>e"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
 " }}}
 
 " {{{ Plugins
 call plug#begin()
   " Colorscheme
   Plug 'nanotech/jellybeans.vim'
-
   " Useful stuff
   Plug 'airblade/vim-gitgutter'
-  Plug 'prabirshrestha/vim-lsp'
+  "Plug 'prabirshrestha/vim-lsp'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
   Plug 'itchyny/lightline.vim'
+  Plug 'SirVer/ultisnips'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 " }}}
 
 colorscheme jellybeans
 let mapleader = ' '
 
-" RETURN turns off search highlighting
-nnoremap <cr> :noh<CR><CR>:<backspace>
+" Complete menu
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " Ghetto NERDTree
 nnoremap <leader>f :Lexplore <CR>
@@ -93,20 +101,25 @@ command! W noautocmd w
 " File associations
 autocmd BufRead,BufNewFile *.v set filetype=verilog
 autocmd BufRead,BufNewFile *.sv set filetype=systemverilog
-autocmd BufRead,BufNewFile *.yml set filetype=yamla
+autocmd BufRead,BufNewFile *.yml set filetype=yaml
 
 " LSP
-nnoremap <Leader>d :LspDocumentDiagnostics<CR>
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-if executable('svls')
-  au User lsp_setup call lsp#register_server({
-      \ 'name': 'svls',
-      \ 'cmd': {server_info->['svls']},
-      \ 'whitelist': ['systemverilog'],
-      \ })
-  let g:lsp_diagnostics_virtual_text_enabled = 1
-  let g:lsp_diagnostics_signs_enabled = 1
-  let g:lsp_log_file = expand('~/.vim-lsp.log')
-  nmap <buffer> [d <plug>(lsp-previous-diagnostic)
-  nmap <buffer> ]d <plug>(lsp-next-diagnostic)
-endif
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+nnoremap <leader>d :CocDiagnostics <CR>
+
