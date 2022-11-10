@@ -46,18 +46,7 @@ let g:netrw_liststyle=3
 let g:netrw_banner=0
 let g:netrw_list_hide='.*\.git/$'
 let g:netrw_winsize=30
-let g:lightline = {
-  \ 'colorscheme': 'jellybeans',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'FugitiveHead'
-  \ },
-  \ }
-
-let g:UltiSnipsExpandTrigger="<leader>e"
+let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
@@ -90,7 +79,7 @@ nnoremap <leader>f :Lexplore <CR>
 
 " Buffers
 noremap <leader>q :bdelete <CR>
-noremap <leader>w :bn <CR>
+noremap <leader><tab> :bn <CR>
 
 " Delete whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
