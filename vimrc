@@ -66,6 +66,7 @@ call plug#begin()
   Plug 'SirVer/ultisnips'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-commentary'
+  Plug 'benjifisher/matchit.zip'
 call plug#end()
 " }}}
 
