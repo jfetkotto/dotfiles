@@ -58,17 +58,19 @@ call plug#begin()
   Plug 'nanotech/jellybeans.vim'
   " Useful stuff
   Plug 'airblade/vim-gitgutter'
-  "Plug 'prabirshrestha/vim-lsp'
+  Plug 'pacha/vem-tabline'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
-  Plug 'itchyny/lightline.vim'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-speeddating'
   Plug 'SirVer/ultisnips'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'jiangmiao/auto-pairs'
+  Plug 'tpope/vim-commentary'
 call plug#end()
 " }}}
 
 colorscheme jellybeans
+nnoremap <Space> <Nop>
 let mapleader = ' '
 
 " Remove search HL on return
