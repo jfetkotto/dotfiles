@@ -16,6 +16,7 @@ set relativenumber
 set splitright
 set splitbelow
 set shiftround
+set hidden
 set autoread
 set cmdheight=1
 set shortmess+=c
