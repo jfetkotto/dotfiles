@@ -102,6 +102,22 @@ autocmd FileType rust setlocal tabstop=4 softtabstop=4 shiftwidth=4
 autocmd FileType c setlocal tabstop=8 softtabstop=8 shiftwidth=8
 autocmd FileType cpp setlocal tabstop=8 softtabstop=8 shiftwidth=8
 
+" {{{ Statusline
+set statusline=
+set statusline+=%#PmenuSel#
+set statusline+=%{FugitiveStatusline()}
+set statusline+=%#LineNr#
+set statusline+=\ %f
+set statusline+=%m
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+set statusline+=\ λ
+" }}}
 
 " COC
 inoremap <silent><expr> <TAB>
