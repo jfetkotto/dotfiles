@@ -63,16 +63,19 @@ call plug#begin()
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-speeddating'
-  Plug 'SirVer/ultisnips'
+ "Plug 'SirVer/ultisnips'
   Plug 'tpope/vim-commentary'
   Plug 'benjifisher/matchit.zip'
-  Plug 'ycm-core/YouCompleteMe'
 call plug#end()
 " }}}
 
 colorscheme jellybeans
 nnoremap <Space> <Nop>
 let mapleader = ' '
+
+" Copy and Paste from system clipboard in visual mode
+vnoremap <c-y> "+y
+vnoremap <c-p> "+p
 
 " Remove search HL on return
 nnoremap <CR> :noh<CR><CR>
@@ -129,20 +132,4 @@ augroup myvimrc
     autocmd QuickFixCmdPost l*    lwindow
 augroup END
 " }}}
-
-" {{{ YCM
-let g:ycm_language_server =
-\ [
-\   {
-\     'name': 'svls',
-\     'cmdline': ['svls'],
-\     'filetypes': ['systemverilog']
-\   }
-\ ]
-" }}}
-
-nnoremap <leader>d :YcmDiag<CR>
-nnoremap <leader>gi :YcmCompleter GoToInclude<CR>
-nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gD :YcmCompleter GoToDeclaration<CR>
 
