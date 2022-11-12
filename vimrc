@@ -64,9 +64,9 @@ call plug#begin()
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-speeddating'
   Plug 'SirVer/ultisnips'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-commentary'
   Plug 'benjifisher/matchit.zip'
+  Plug 'ycm-core/YouCompleteMe'
 call plug#end()
 " }}}
 
@@ -130,26 +130,19 @@ augroup myvimrc
 augroup END
 " }}}
 
-
-" {{{ COC settings
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-nmap <leader>rn <Plug>(coc-rename)
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-nnoremap <leader>d :CocDiagnostics <CR>
+" {{{ YCM
+let g:ycm_language_server =
+\ [
+\   {
+\     'name': 'svls',
+\     'cmdline': ['svls'],
+\     'filetypes': ['systemverilog']
+\   }
+\ ]
 " }}}
+
+nnoremap <leader>d :YcmDiag<CR>
+nnoremap <leader>gi :YcmCompleter GoToInclude<CR>
+nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gD :YcmCompleter GoToDeclaration<CR>
 
