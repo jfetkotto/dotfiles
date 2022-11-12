@@ -97,6 +97,8 @@ autocmd BufRead,BufNewFile *.yml set filetype=yaml
 
 " Allow tab in makefiles
 autocmd FileType make setlocal noexpandtab
+autocmd FileType make setlocal tabstop=8 softtabstop=8 shiftwidth=8
+
 
 autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
 autocmd FileType rust setlocal tabstop=4 softtabstop=4 shiftwidth=4
@@ -120,7 +122,16 @@ set statusline+=\ %l:%c
 set statusline+=\ λ
 " }}}
 
-" COC
+" {{{ QuickFixCmdPost - vimgrep quickfix etc
+augroup myvimrc
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* cwindow
+    autocmd QuickFixCmdPost l*    lwindow
+augroup END
+" }}}
+
+
+" {{{ COC settings
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
@@ -140,4 +151,5 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 nnoremap <leader>d :CocDiagnostics <CR>
+" }}}
 
