@@ -46,16 +46,10 @@ let g:netrw_liststyle=3
 let g:netrw_banner=0
 let g:netrw_list_hide='.*\.git/$'
 let g:netrw_winsize=30
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
 " }}}
 
 " {{{ Plugins
 call plug#begin()
-  " Colorscheme
-  Plug 'nanotech/jellybeans.vim'
   " Useful stuff
   Plug 'airblade/vim-gitgutter'
   Plug 'pacha/vem-tabline'
@@ -63,13 +57,16 @@ call plug#begin()
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-speeddating'
- "Plug 'SirVer/ultisnips'
   Plug 'tpope/vim-commentary'
   Plug 'benjifisher/matchit.zip'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
 call plug#end()
 " }}}
 
-colorscheme jellybeans
+colorscheme desert
 nnoremap <Space> <Nop>
 let mapleader = ' '
 
@@ -97,6 +94,7 @@ command! W noautocmd w
 autocmd BufRead,BufNewFile *.v set filetype=verilog
 autocmd BufRead,BufNewFile *.sv set filetype=systemverilog
 autocmd BufRead,BufNewFile *.yml set filetype=yaml
+autocmd BufRead,BufNewFile *.r set filetype=xml
 
 " Allow tab in makefiles
 autocmd FileType make setlocal noexpandtab
@@ -131,5 +129,62 @@ augroup myvimrc
     autocmd QuickFixCmdPost [^l]* cwindow
     autocmd QuickFixCmdPost l*    lwindow
 augroup END
+" }}}
+
+" {{{ LSP Settings
+if executable('svls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'svls',
+        \ 'cmd': {server_info->['svls']},
+        \ 'allowlist': ['systemverilog'],
+        \ })
+endif
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> <leader>d <plug>(lsp-document-diagnostics)
+    nmap <buffer> <leader>gd <plug>(lsp-definition)
+    nmap <buffer> <leader>gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> <leader>gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> <leader>gr <plug>(lsp-references)
+    nmap <buffer> <leader>gi <plug>(lsp-implementation)
+    nmap <buffer> <leader>gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> <leader>K <plug>(lsp-hover)
+    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+
+    let g:lsp_diagnostics_virtual_text_enabled = 1
+    let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 1
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+" }}}
+
+" {{ Completion
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+" }}
+
+" {{{ Snippets
+imap <expr> <tab>   vsnip#jumpable(1)   ? '<plug>(vsnip-jump-next)'      : '<tab>'
+smap <expr> <tab>   vsnip#jumpable(1)   ? '<plug>(vsnip-jump-next)'      : '<tab>'
+imap <expr> <s-tab> vsnip#jumpable(-1)  ? '<plug>(vsnip-jump-prev)'      : '<s-tab>'
+smap <expr> <s-tab> vsnip#jumpable(-1)  ? '<plug>(vsnip-jump-prev)'      : '<s-tab>'
+
+imap <expr> <c-e>   vsnip#expandable()  ? '<plug>(vsnip-expand)'         : '<c-e>'
+smap <expr> <c-e>   vsnip#expandable()  ? '<plug>(vsnip-expand)'         : '<c-e>'
 " }}}
 
