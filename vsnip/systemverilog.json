@@ -2,9 +2,9 @@
   "Section": {
     "prefix": ["sec"],
     "body": [
-      "// {{ ${1: Section name}",
+      "// {{{ ${1: Section name}",
       "$0",
-      "// }} $1"
+      "// }}} $1"
     ],
     "description": "Section title"
   },
@@ -13,8 +13,8 @@
     "prefix": ["dff_norst_noen"],
     "body" : [
       "// DFF: .ck($1), .d($3), .q($2)",
-      "always_ff @(${1:ck})",
-      "  ${2:q} <= ${3:d}",
+      "always_ff @(posedge ${1:ck})",
+      "  ${2:q} <= ${3:d};",
       "",
       "$0"
     ],
@@ -25,7 +25,7 @@
     "prefix": ["dff_norst_en"],
     "body": [
       "// DFF: .ck($1), .en($2), .d($4), .q($3)",
-      "always_ff @(${1:ck})",
+      "always_ff @(posedge ${1:ck})",
       "  if (${2:en}) ${3:q} <= ${4:d};",
       "  else $3 <= $3;",
       "",
@@ -37,10 +37,10 @@
   "dff_arst_noen": {
     "prefix": ["dff_arst_noen"],
     "body": [
-      "// DFF: .ck($1), .arst($2), .d($4), .q($3)",
-      "always_ff @(${1:ck}, ${2:arst})",
+      "// DFF: .ck($1), .arst($2), .d($5), .q($3)",
+      "always_ff @(posedge ${1:ck}, posedge ${2:arst})",
       "  if ($2) ${3:q} <= ${4:reset value};",
-      "  else $3 <= ${4:d};",
+      "  else $3 <= ${5:d};",
       "",
       "$0"
     ],
@@ -51,7 +51,7 @@
     "prefix": ["dff_arst_en"],
     "body": [
       "// DFF: .ck($1), .arst($2), .en($5), .d($6), .q($3)",
-      "always_ff @(${1:ck}, ${2:arst})",
+      "always_ff @(posedge ${1:ck}, posedge ${2:arst})",
       "  if ($2) ${3:q} <= ${4:reset value};",
       "  else if (${5:en}) $3 <= ${6:d};",
       "  else $3 <= $3;",
@@ -65,7 +65,7 @@
     "prefix": ["dff_srst_noen"],
     "body": [
       "// DFF: .ck($1), .srst($2), .d($5), .q($3)",
-      "always_ff @(${1:ck})",
+      "always_ff @(posedge ${1:ck})",
       "  if (${2:srst}) ${3:q} <= ${4:reset value};",
       "  else $3 <= ${5:d};",
       "",
@@ -79,7 +79,7 @@
     "prefix": ["dff_srst_en"],
     "body": [
       "// DFF: .ck($1), .srst($2), .en($5), .d($6), .q($3)",
-      "always_ff @(${1:ck})",
+      "always_ff @(posedge ${1:ck})",
       "  if (${2:srst}) ${3:q} <= ${4:reset value};",
       "  else if (${5:en}) $3 <= ${6:d};",
       "  else $3 <= $3;",
@@ -93,8 +93,8 @@
     "prefix": ["tflop_arst"],
     "body": [
       "// TFF: .ck($1), .arst($2), .t($5), .q($3)",
-      "always_ff @(${1:ck})",
-      "  if (${2:arst}) ${3:q} <= ${4:reset value};",
+      "always_ff @(posedge ${1:ck}, posedge ${2:arst})",
+      "  if ($2) ${3:q} <= ${4:reset value};",
       "  else $3 <= ${5:t} ? ~$3 : $3;",
       "",
       "$0"
