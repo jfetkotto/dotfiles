@@ -31,7 +31,6 @@ set smarttab
 set expandtab
 set cursorline
 set background=dark
-set termguicolors
 set foldmethod=marker
 set showmatch
 set hlsearch
@@ -63,10 +62,11 @@ call plug#begin()
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
+  Plug 'chriskempson/base16-vim'
 call plug#end()
 " }}}
 
-colorscheme desert
+colorscheme base16-grayscale-dark
 nnoremap <Space> <Nop>
 let mapleader = ' '
 
